@@ -3,6 +3,7 @@
 ## Week 1
 
 ### Monday, July 27
+
 **Accomplished:**
 Attended the project kickoff session — covered course expectations, reviewed
 the project constraints (Flask backend, limited scope, required vertical
@@ -19,6 +20,7 @@ start drafting the scope for Thursday's Deliverable 1.
 
 
 ### Tuesday, July 28
+
 **Accompli :**
 Created the GitHub repository and cloned it locally. Wrote the initial
 PROJECT_PLAN.md covering the client interpretation, target user, project
@@ -26,12 +28,28 @@ scope, database models, and proposed routes for the artwork rental site. Set
 up the Trello board (Backlog, To-Do, In-progress, Testing, Done, and User
 Stories) and populated it with initial tasks and user stories.
 
-**Defis rencontrés:**
+**Challenges faced:**
 Accidentally started cloning the new repo inside an old project folder, which
 would have created nested git directories — caught it before cloning and
 fixed the local path. Also had to re-clarify project scope limits while
 writing the database models to avoid overbuilding.
-**Prochaine étape :**
+
+**Next step:**
 
 Finalize the Figma design (desktop and mobile layouts) and write the short
 design rationale before Thursday's Deliverable 1 presentation.
+
+### Wednesday, July 29
+**Accomplished: **
+Continued building the Figma file — progressed from low-fidelity
+wireframes to medium and high-fidelity versions for the catalog, artwork
+detail, and gallery screens, including desktop and mobile layouts.
+
+**Challenges faced:**
+Balancing how much detail to put into each fidelity stage without spending
+too much time refining early wireframes that would change anyway.
+
+**Next step::**
+Finalize the color palette and typography choices,  write the design
+rationale, and prepare for Thursday's Deliverable 1 presentation.
+

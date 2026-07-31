@@ -102,3 +102,19 @@ dates → submit rental request → see confirmation → view it under "My Renta
 ## 9. Initial Task Plan
 
 See the Trello board: https://trello.com/invite/b/6a695fd1b3939959bed3c678/ATTI2b5e989a21401824537c7b8672e08c49F6270FF9/web-project-1-art-rental
+
+## 10. Design Rationale
+
+My design uses a white dark and yellow palette, gallery painting inspired palette(deppe charcoal background cards and ivrory pbtton) to make the artwork itself the visual focus, similar to how pieces are lit against a wall in a gallery. amuted gold accent for primary accent, dust rose tone for flags rental status.
+
+**Color Palette**
+- background white : #ffff
+- Card Surface : #2C2925
+- Primary text : #ffffff
+- Muted text. : #594826
+- Accent (primary actions): #F9F0C5
+- Secondary accent (status badges): #D69A9A. #F9F0C5
+
+**Typography:**
+- Headings: Inria Serif
+- Body text: Inter
