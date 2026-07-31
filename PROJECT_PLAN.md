@@ -118,3 +118,5 @@ My design uses a white dark and yellow palette, gallery painting inspired palett
 **Typography:**
 - Headings: Inria Serif
 - Body text: Inter
+
+See the FIGMA LINK: https://www.figma.com/design/pRxMSLYv2VnMQgBr9HtHTe/Untitled?node-id=1-2&t=uFXvz79nTU1UPoeA-1
