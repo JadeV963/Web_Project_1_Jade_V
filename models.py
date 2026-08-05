@@ -1,4 +1,4 @@
-from app import db
+from extensions import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -9,7 +9,7 @@ class User(db.Model):
     def __repr(self):
         return f"<User {self.name}>"
 
-class ArtWork(db.Model):
+class Artwork(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150), nullable=False)
     artist_name = db.Column(db.String(150), nullable=False)
