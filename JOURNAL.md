@@ -40,7 +40,8 @@ Finalize the Figma design (desktop and mobile layouts) and write the short
 design rationale before Thursday's Deliverable 1 presentation.
 
 ### Wednesday, July 29
-**Accomplished: **
+
+**Accomplished:**
 Continued building the Figma file — progressed from low-fidelity
 wireframes to medium and high-fidelity versions for the catalog, artwork
 detail, and gallery screens, including desktop and mobile layouts.
@@ -52,4 +53,20 @@ too much time refining early wireframes that would change anyway.
 **Next step::**
 Finalize the color palette and typography choices,  write the design
 rationale, and prepare for Thursday's Deliverable 1 presentation.
+
+### Tuesday, August 4
+
+**Accomplished:**
+Set up a Python virtual environment and installed Flask, Flask-SQLAlchemy, and
+Flask-Login. Built a minimal Flask app and confirmed it runs correctly in the
+browser. Created the initial database models (User, Artwork, Rental)
+
+**Challenges faced**
+Ran into a circular import error between app.py and models.py, since each
+file was trying to import from the other.
+
+**Next step:**
+Get the app running successfully with all models created in the database,
+then start building the first real route (the artwork catalog page) backed
+by real database content.
 

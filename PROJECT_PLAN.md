@@ -84,15 +84,15 @@ rental form, dynamic availability check).
 
 ## 7. Proposed Routes / Endpoints
 
-| Route | Method | Purpose |
+| Route | Method | Purpose | Auth requiered |
 |---|---|---|
-| `/` | GET | Artwork catalog (browse all available artworks) |
-| `/artwork/<id>` | GET | Artwork detail page |
-| `/rent/<id>` | POST | Submit a rental request for an artwork |
-| `/my-rentals` | GET | View the logged-in user's rental history |
-| `/register` | GET/POST | Create a new account |
-| `/login` | GET/POST | Log in |
-| `/logout` | GET | Log out |
+| `/` | GET | Artwork catalog (browse all available artworks) | No |
+| `/artwork/<id>` | GET | Artwork detail page | No |
+| `/rent/<id>` | POST | Submit a rental request for an artwork | Yes |
+| `/my-rentals` | GET | View the logged-in user's rental history | Yes |
+| `/register` | GET/POST | Create a new account | No |
+| `/login` | GET/POST | Log in | No |
+| `/logout` | GET | Log out | Yes |
 
 ## 8. Main User Workflow (Vertical Slice)
 
