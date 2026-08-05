@@ -54,6 +54,7 @@ too much time refining early wireframes that would change anyway.
 Finalize the color palette and typography choices,  write the design
 rationale, and prepare for Thursday's Deliverable 1 presentation.
 
+## Week 2
 ### Tuesday, August 4
 
 **Accomplished:**

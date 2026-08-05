@@ -2,13 +2,15 @@
 from flask import Flask, request, render_template
 
 from extensions import db, login_manager
+
+from flask_login import login_user, logout_user, login_required
 #---------------------------------------------------
 # Creation de l'application
 app = Flask(__name__)
 
 # Configuration de la base de données 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///gallery.db"
-
+app.config["SECRET_KEY"] = "dev-secret-change-later"
 #connecte la db qui est dans extensions
 db.init_app(app)
 login_manager.init_app(app)
@@ -57,6 +59,28 @@ def register():
         return f"Account created for {name}!"
 
     return render_template("register.html")
+
+@app.route("/login", methods = ["GET", "POST"])
+def login():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        user = User.query.filter_by(email=email).first()
+
+        if user is None or not user.check_password(password):
+           return "Invalid email or password."
+
+        login_user(user)
+        return f"logged in as {user.name}!"
+
+    return render_template("login.html")
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return "Your have been logged out."
 
 if __name__ == "__main__":
     with app.app_context():
