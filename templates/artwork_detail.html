@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{artwork.title}} - Aurora Fine Arts</title>
+</head>
+<body>
+    <h1>{{ artwork.title }}</h1>
+    <p>by {{ artwork.artist_name }}</p>
+    <p>{{ artwork.category }}</p>
+    <p>${{ artwork.price_per_month }}/month</p>
+
+    {% if artwork.is_available %}
+        <p>Available</p>
+        <a href="/rent/{{ artwork.id }}">Rent this piece</a>
+    {% else %}
+        <p>Not available</p>
+    {% endif %} 
+
+</body>
+</html>

@@ -71,3 +71,17 @@ Get the app running successfully with all models created in the database,
 then start building the first real route (the artwork catalog page) backed
 by real database content.
 
+### Wednesday, August 5
+Debugged and fixed a circular import between app.py and models.py by moving
+the db object into a separate extensions.py file. Added the Artwork model to
+the database and confirmed it displays real data on the catalog route. Built
+full authentication: /register (with password hashing and duplicate-email
+validation), /login (with password verification via Flask-Login), and
+/logout (protected with @login_required). Fixed a missing SECRET_KEY
+RuntimeError that was blocking login sessions. Diagnosed a Chrome-specific
+403 error (confirmed unrelated to the app by testing successfully in Safari).
+
+**Challenges faced:**
+Several blocking bugs: a route defined after app.run() , a typo (== instead of =)
+, a missing SECRET_KEY needed for Flask-Login sessions,
+and had perimission errors with Chrome. used Safari instead.

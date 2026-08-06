@@ -3,7 +3,9 @@ from flask import Flask, request, render_template
 
 from extensions import db, login_manager
 
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
+
+from datetime import datetime
 #---------------------------------------------------
 # Creation de l'application
 app = Flask(__name__)
@@ -81,6 +83,37 @@ def login():
 def logout():
     logout_user()
     return "Your have been logged out."
+
+@app.route("/artwork/<int:artwork_id>")
+def artwork_detail(artwork_id):
+    artwork = Artwork.query.get_or_404(artwork_id)
+    return render_template("artwork_detail.html", artwork=artwork)
+
+@app.route("/rent/<int:artwork_id>", methods=["GET", "POST"])
+@login_required
+def rent(artwork_id):
+    artwork = Artwork.query.get_or_404(artwork_id)
+
+    if request.method == "POST":
+        start = datetime.strptime(request.form.get("start_date"), "%Y-%m-%d").date()
+        end = datetime.strptime(request.form.get("end_date"), "%Y-%m-%d").date()
+
+        if end <= start:
+            return "End date must be after start date."
+
+        new_rental = Rental(
+            user_id=current_user.id,
+            artwork_id=artwork.id,
+            start_date=start,
+            end_date=end,
+            status="pending"
+        )
+        db.session.add(new_rental)
+        db.session.commit()
+
+        return f"Rental request submitted for {artwork.title}!"
+
+    return render_template("rent.html", artwork=artwork)
 
 if __name__ == "__main__":
     with app.app_context():
