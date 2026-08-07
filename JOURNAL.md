@@ -85,3 +85,5 @@ RuntimeError that was blocking login sessions. Diagnosed a Chrome-specific
 Several blocking bugs: a route defined after app.run() , a typo (== instead of =)
 , a missing SECRET_KEY needed for Flask-Login sessions,
 and had perimission errors with Chrome. used Safari instead.
+
+**Next step:**

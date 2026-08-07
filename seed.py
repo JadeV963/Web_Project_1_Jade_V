@@ -34,4 +34,18 @@ with app.app_context():
     db.session.add(artwork3)
     db.session.commit()
 
+    from models import User
+
+    admin_user = User(
+        name="Admin",
+        email="admin@aurorafinearts.com"
+    )
+
+    admin_user.set_password("admin123")
+    admin_user.is_admin = True
+
+    db.session.add(admin_user)
+    db.session.commit()
+
+    
     print("Seed data added!")

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Aurora Fine Arts{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Catalog</a> |
+        {% if current_user.is_authenticated %}
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/login">Login</a> |
+            <a href="/register">Register</a>
+        {% endif %}
+    </nav>
+    <hr>
+
+    {% block content %}{% endblock %}
+</body>
+</html>

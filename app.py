@@ -78,6 +78,27 @@ def login():
 
     return render_template("login.html")
 
+@app.route("/admin/rentals")
+@login_required
+def admin_rentals():
+    if not current_user.is_admin:
+        return "Access denied - admins only", 403
+
+    pending = Rental.query.filter_by(status="pending").all()
+    return render_template("admin_rentals.html", rentals=pending)
+
+@app.route("/admin/rentals/<int:rental_id>/approve")
+@login_required
+def approve_rental(rental_id):
+    if not current_user.is_admin:
+        return "Access denied — admins only.", 403
+
+    rental = Rental.query.get_or_404(rental_id)
+    rental.status = "confirmed"
+    db.session.commit()
+
+    return f"Rental #{rental.id} confirmed."
+
 @app.route("/logout")
 @login_required
 def logout():
@@ -94,6 +115,9 @@ def artwork_detail(artwork_id):
 def rent(artwork_id):
     artwork = Artwork.query.get_or_404(artwork_id)
 
+    if not artwork.is_available:
+        return "This artwork is no longer available."
+
     if request.method == "POST":
         start = datetime.strptime(request.form.get("start_date"), "%Y-%m-%d").date()
         end = datetime.strptime(request.form.get("end_date"), "%Y-%m-%d").date()
@@ -108,6 +132,9 @@ def rent(artwork_id):
             end_date=end,
             status="pending"
         )
+
+        artwork.is_available = False
+        
         db.session.add(new_rental)
         db.session.commit()
 

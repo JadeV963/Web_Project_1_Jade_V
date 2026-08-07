@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Admin — Pending Rentals{% endblock %}
+{% block content %}
+    <h1>Pending Rental Requests</h1>
+    {% for rental in rentals %}
+        <p>
+            Rental #{{ rental.id }} — {{ rental.artwork.title }} for {{ rental.user.name }}
+            ({{ rental.start_date }} to {{ rental.end_date }})
+            <a href="/admin/rentals/{{ rental.id }}/approve">Approve</a>
+        </p>
+    {% endfor %}
+{% endblock %}
