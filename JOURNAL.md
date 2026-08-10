@@ -101,3 +101,21 @@ Received feedback: the project was missing an admin-only route to review and app
 
 **Next step:**
 Add an admin approval workflow (a route restricted to admin users that lists pending rentals and lets them be approved), and add client-side JavaScript validation for the rental date form as a first step toward more interactive features.
+
+### Sunday, August 9
+**Accomplished:**
+Added an admin-only approval workflow, linked client-side JavaScript form validation, and fixed base.html which was empty and blocking all Jinja template inheritance. 
+Also improved the rental logic so an artwork's availability is set to false once a rental request is submitted, preventing duplicate requests for the same piece. 
+Added the last missing route, /my-rentals, so clients can check the status of their
+requests. 
+Connected the artwork catalog page with clickable links to each
+artwork's detail page, and configured Flask-Login to redirect unauthenticated
+users to the login page (with a link to register)
+
+**Challenges faced:**
+Several small bugs compounded during testing  with browser. tried to manage with Safari instead of Google Chrome.
+
+**Next step:**
+Do a final full walkthrough of the entire user journey (browse → view →
+rent → admin approve → my-rentals shows confirmed) before the next
+deliverable.
