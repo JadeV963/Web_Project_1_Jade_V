@@ -87,3 +87,17 @@ Several blocking bugs: a route defined after app.run() , a typo (== instead of =
 and had perimission errors with Chrome. used Safari instead.
 
 **Next step:**
+Prepare the data flow diagram, and presentation.
+
+### Thursday, August 6
+
+**Accomplished:**
+Presented Deliverable 2 to the class 
+application: database models (User, Artwork, Rental), full authentication
+(register, login, logout with password hashing and Flask-Login), the artwork catalog reading real data from the database, and the artwork User and Artwork.
+
+**Challenges faced:**
+Received feedback: the project was missing an admin-only route to review and approve rental requests.
+
+**Next step:**
+Add an admin approval workflow (a route restricted to admin users that lists pending rentals and lets them be approved), and add client-side JavaScript validation for the rental date form as a first step toward more interactive features.
