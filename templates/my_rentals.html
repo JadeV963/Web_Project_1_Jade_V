@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}My Rentals{% endblock %}
+{% block content %}
+    <h1>My Rentals</h1>
+    {% for rental in rentals %}
+        <p>
+            {{ rental.artwork.title }}-{{ rental.start_date}} to {{ rentals.end_date }} 
+            - Status:<strong>{{ rental.status }}</strong>
+        </p>
+    {% endfor %}
+{% endblock %}

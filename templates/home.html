@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Catalog{% endblock %}
+{% block content %}
+    <h1>Artwork Catalog</h1>
+    {% for art in artworks %}
+        <p>
+            <a href="/artwork/{{ art.id }}">{{ art.title }}</a>
+            by {{ art.artist_name }} — ${{ art.price_per_month }}/month
+        </p>
+    {% endfor %}
+{% endblock %}

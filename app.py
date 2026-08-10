@@ -16,6 +16,7 @@ app.config["SECRET_KEY"] = "dev-secret-change-later"
 #connecte la db qui est dans extensions
 db.init_app(app)
 login_manager.init_app(app)
+login_manager.login_view = "login"
 
 #On importe les modèles APRÈS avoir créé "db", car models.py a besoin de "db"
 from models import User, Artwork, Rental
@@ -27,10 +28,7 @@ def load_user(user_id):
 @app.route("/")
 def home():
     artworks = Artwork.query.all()
-    output = ""
-    for art in artworks:
-        output += f"<p>{art.title} by {art.artist_name} - ${art.price_per_month}/month</p>"
-    return output
+    return render_template("home.html", artworks=artworks)
 #---------------------------------------------------
 # Cette ligne vérifie que le fichier est exécuté directement, 
 # et pas juste importé par un autre fichier —
@@ -134,13 +132,18 @@ def rent(artwork_id):
         )
 
         artwork.is_available = False
-        
+
         db.session.add(new_rental)
         db.session.commit()
 
         return f"Rental request submitted for {artwork.title}!"
 
     return render_template("rent.html", artwork=artwork)
+@app.route("/my-rentals")
+@login_required
+def my_rentals():
+    rentals = Rental.query.filter_by(user_id=current_user.id).all()
+    return render_template("my_rentals.html", rentals=rentals)
 
 if __name__ == "__main__":
     with app.app_context():
