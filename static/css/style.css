@@ -1,0 +1,102 @@
+/* Reset et base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: #1C1B1A;
+    color: #F2EDE4;
+    line-height: 1.6;
+}
+
+h1, h2 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 12px;
+}
+
+a {
+    color: #C9899A;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 28px;
+    border-bottom: 1px solid #3A3835;
+}
+
+nav a {
+    color: #F2EDE4;
+    margin-left: 16px;
+}
+
+/* Contenu principal */
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 20px;
+}
+
+/* Cartes du catalogue */
+.artwork-card {
+    background: #262523;
+    border: 1px solid #3A3835;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+/* Badges de statut (available / rented / pending) */
+.badge {
+    display: inline-block;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid #8A9B8E;
+    color: #8A9B8E;
+    background: rgba(138, 155, 142, 0.15);
+}
+
+/* Formulaires */
+form input {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    padding: 10px;
+    margin: 8px 0 16px;
+    background: #262523;
+    border: 1px solid #3A3835;
+    border-radius: 6px;
+    color: #F2EDE4;
+}
+
+form input[type="submit"] {
+    background: #C9899A;
+    color: #2B1219;
+    font-weight: 600;
+    cursor: pointer;
+    max-width: fit-content;
+    border: none;
+}
+
+/* Responsive : mobile */
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    main {
+        padding: 20px 16px;
+    }
+}

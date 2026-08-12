@@ -3,9 +3,15 @@
 {% block content %}
     <h1>Artwork Catalog</h1>
     {% for art in artworks %}
-        <p>
-            <a href="/artwork/{{ art.id }}">{{ art.title }}</a>
-            by {{ art.artist_name }} — ${{ art.price_per_month }}/month
+    <div class="artwork-card">
+        <a href="/artwork/{{ art.id }}"><strong>{{ art.title }}</strong></a>
+        <p>by {{ art.artist_name }} — ${{ art.price_per_month }}/month
         </p>
+        {% if art.is_available%}
+            <span class="badge">Available</span>
+        {% else %}
+            <span class="badge" style="border-color:#A39C8E; color:#A39C8E; background:rgba(163,156,142,0.15);">Not available</span>
+        {% endif %}
+        </div>
     {% endfor %}
 {% endblock %}

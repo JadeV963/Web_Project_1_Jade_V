@@ -5,6 +5,10 @@ from extensions import db, login_manager
 
 from flask_login import login_user, logout_user, login_required, current_user
 
+from flask import Flask, request, render_template, redirect, url_for
+
+from flask import Flask, request, render_template, redirect, url_for, flash
+
 from datetime import datetime
 #---------------------------------------------------
 # Creation de l'application
@@ -44,11 +48,18 @@ def register():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        #Validation simple: verification si l'email est pas deja utilisé
+        if "@" not in email or "." not in email:
+            flash("Please enter a valid email address.", "error")
+            return redirect(url_for("register"))
+
+        if len(password) < 8:
+            flash("Password must be at least 8 characters long.", "error")
+            return redirect(url_for("register"))
 
         existing_user = User.query.filter_by(email=email).first()
         if existing_user:
-            return "this email is already registered."
+            flash("This email is already registered.", "error")
+            return redirect(url_for("register"))
 
         new_user = User(name=name, email=email)
         new_user.set_password(password)
@@ -56,7 +67,8 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
-        return f"Account created for {name}!"
+        flash("Account created! Please log in.", "success")
+        return redirect(url_for("login"))
 
     return render_template("register.html")
 
@@ -72,7 +84,8 @@ def login():
            return "Invalid email or password."
 
         login_user(user)
-        return f"logged in as {user.name}!"
+        flash(f"Logged in as {user.name}!")
+        return redirect(url_for("home"))
 
     return render_template("login.html")
 

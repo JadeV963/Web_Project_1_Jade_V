@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Aurora Fine Arts</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
     <h1>Create an account</h1>
     <form method="POST">
         Name: <input type="text" name="name"><br>
-        Email:<input type="email" name="email"><br>
-        Password:<input type="password" name="password"><br>
+        Email: <input type="email" name="email"><br>
+        Password: <input type="password" name="password"><br>
         <input type="submit" value="Register">
     </form>
-</body>
-</html>
+    <p>Already have an account? <a href="/login">Log in here</a></p>
+{% endblock %}

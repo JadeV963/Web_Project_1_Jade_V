@@ -16,3 +16,30 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     }
 })
+
+document.addEventListener("DOMContentLoaded", function () {
+    const registerForm = document.querySelector('form[action=""], form');
+    const emailInput = document.querySelector('input[name="email"]');
+    const passwordInput = document.querySelector('input[name="password"]');
+
+    if (emailInput && passwordInput) {
+        const form = emailInput.closest("form");
+
+        form.addEventListener("submit", function (event) {
+            const email = emailInput.value;
+            const password = passwordInput.value;
+
+            if (!email.includes("@") || !email.includes(".")) {
+                event.preventDefault();
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            if (password.length < 8) {
+                event.preventDefault();
+                alert("Password must be at least 8 characters long.");
+                return;
+            }
+        });
+    }
+});

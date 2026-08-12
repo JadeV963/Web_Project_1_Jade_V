@@ -3,9 +3,14 @@
 {% block content %}
     <h1>My Rentals</h1>
     {% for rental in rentals %}
-        <p>
-            {{ rental.artwork.title }}-{{ rental.start_date}} to {{ rentals.end_date }} 
-            - Status:<strong>{{ rental.status }}</strong>
-        </p>
+        <div class="artwork-card">
+            <strong>{{ rental.artwork.title }}</strong>
+            <p>{{ rental.start_date }} to {{ rental.end_date }}</p>
+            {% if rental.status == "confirmed" %}
+                <span class="badge">Confirmed</span>
+            {% else %}
+                <span class="badge" style="border-color:#C9899A; color:#C9899A; background:rgba(201,137,154,0.15);">Pending</span>
+            {% endif %}
+        </div>
     {% endfor %}
 {% endblock %}
