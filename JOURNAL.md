@@ -119,3 +119,36 @@ Several small bugs compounded during testing  with browser. tried to manage with
 Do a final full walkthrough of the entire user journey (browse → view →
 rent → admin approve → my-rentals shows confirmed) before the next
 deliverable.
+
+
+### Monday, August 10
+
+**Accomplished:**
+Added a full CSS stylesheet matching the Figma design direction, including a
+responsive nav for mobile screens. Fixed a broken UX flow where register and
+login returned plain confirmation text with no navigation — both now
+redirect properly (register → login → catalog).
+
+**Challenges faced:**
+Register and login originally returned raw text with no way to continue
+navigating the site — realized this broke the whole user flow, not just a
+cosmetic issue.
+
+**Next step:**
+Verify the interface substantially matches the
+Figma design across all pages, test responsive layout on a narrow viewport,
+and do a full walkthrough of error and success states.
+
+### Tuesday, August 11
+
+**Accomplished:**
+Added artwork cards and status badges (Available/Not available,
+Pending/Confirmed) across the catalog, artwork detail, and my-rentals pages.
+Added client-side JavaScript validation for email format and password length
+on the register/login forms.
+
+**Challenges faced:**
+bowser bugs again with chrome.
+
+**Next step:**
+Finalize the style in rent.html and admin_rentals.html
