@@ -152,3 +152,23 @@ bowser bugs again with chrome.
 
 **Next step:**
 Finalize the style in rent.html and admin_rentals.html
+
+### Thursday, August 13
+
+**Accomplished:**
+Fixed login.html. Verified my_rentals.html was
+already correctly structured. Added a responsive catalog grid (3 columns
+desktop 2 columns mobile) and a mobile hamburger menu that toggles the nav
+links on narrow screens. Reviewed the CRUD coverage of the project (Create/Read/
+Update present, Delete missing) and identified a known limitation where the
+admin approve route uses GET instead of POST both noted for a future fix.
+
+**Challenges faced:**
+
+organized file so the responsive
+behavior stays predictable
+
+**Next step:**
+Add a delete/cancel workflow to complete full CRUD coverage, and change the
+admin approve route from GET to a POST-protected action, before the next
+deliverable.

@@ -28,6 +28,7 @@ with app.app_context():
                 price_per_month=70.00,
                 is_available=True
             )
+    
 
     db.session.add(artwork1)
     db.session.add(artwork2)
@@ -47,5 +48,5 @@ with app.app_context():
     db.session.add(admin_user)
     db.session.commit()
 
-    
+
     print("Seed data added!")

@@ -3,10 +3,12 @@
 {% block content %}
     <h1>Pending Rental Requests</h1>
     {% for rental in rentals %}
-        <p>
-            Rental #{{ rental.id }} — {{ rental.artwork.title }} for {{ rental.user.name }}
-            ({{ rental.start_date }} to {{ rental.end_date }})
+        <div class="artwork-card">
+            <strong>{{ rental.artwork.title }}</strong> for {{ rental.user.name}}
+            <p>{{ rental.start_date }} to {{ rental.end_date }}</p>
+            <span class="badge" style="border-color:#C9899A; color:#C9899A; background:rgba(201,137,154,0.15);">Pending</span>
+            <br><br>
             <a href="/admin/rentals/{{ rental.id }}/approve">Approve</a>
-        </p>
+        </div>
     {% endfor %}
 {% endblock %}

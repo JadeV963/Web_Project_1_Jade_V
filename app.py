@@ -41,6 +41,28 @@ def home():
 
 from flask import request
 
+def is_valid_email(email):
+    if " " in email:
+        return False
+
+    parts = email.split("@")
+    if len(parts) != 2:
+        return False
+
+    local, domain = parts
+    if len(local) == 0:
+        return False
+
+    if "." not in domain:
+        return False
+
+    domain_parts = domain.split(".")
+    for part in domain_parts:
+        if len(part) == 0:
+            return False
+
+    return True
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -48,7 +70,7 @@ def register():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        if "@" not in email or "." not in email:
+        if not is_valid_email(email):
             flash("Please enter a valid email address.", "error")
             return redirect(url_for("register"))
 
@@ -56,6 +78,14 @@ def register():
             flash("Password must be at least 8 characters long.", "error")
             return redirect(url_for("register"))
 
+        if password == password.lower():
+            flash("Password must contain at least one uppercase letter.", "error")
+            return redirect(url_for("register"))
+
+        if not any(char.isdigit() for char in password):
+            flash("Password must contain at least one number.", "error")
+            return redirect(url_for("register"))
+    
         existing_user = User.query.filter_by(email=email).first()
         if existing_user:
             flash("This email is already registered.", "error")
@@ -67,7 +97,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
-        flash("Account created! Please log in.", "success")
+        flash("Account created!")
         return redirect(url_for("login"))
 
     return render_template("register.html")
@@ -114,7 +144,8 @@ def approve_rental(rental_id):
 @login_required
 def logout():
     logout_user()
-    return "Your have been logged out."
+    flash("You have been logged out.", "success")
+    return redirect(url_for("home"))
 
 @app.route("/artwork/<int:artwork_id>")
 def artwork_detail(artwork_id):
@@ -124,6 +155,10 @@ def artwork_detail(artwork_id):
 @app.route("/rent/<int:artwork_id>", methods=["GET", "POST"])
 @login_required
 def rent(artwork_id):
+    if current_user.is_admin:
+        flash("Admin accounts cannot rent artworks.", "error")
+        return redirect(url_for("artwork_detail", artwork_id=artwork_id))
+
     artwork = Artwork.query.get_or_404(artwork_id)
 
     if not artwork.is_available:

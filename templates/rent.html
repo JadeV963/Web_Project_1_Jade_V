@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Rent {{ artwork.title }} - Aurora Fine Arts</title>
-</head>
-<body>
-    <h1>Rent "{{ artwork.title }}"</h1>
+{% extends "base.html" %}
+{% block title %}Rent {{ artwork.title }}{% endblock %}
+{% block content %}
+
+    <div class="artwork_card">
+        <h1>Rent "{{ artwork.title }}"</h1>
+        <p>by {{ artwork.artist_name}} - ${{ artwork.price_per_month }}/month</p>
+    </div>
+
     <form method="POST">
         Start date: <input type="date" name="start_date"><br>
         End date: <input type="date" name="end_date"><br>
         <input type="submit" value="Submit request">
     </form>
     
-</body>
-</html>
+{% endblock %}

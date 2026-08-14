@@ -8,7 +8,9 @@
 
     {% if artwork.is_available %}
         <span class="badge">Available</span><br><br>
+        {% if not current_user.is_authenticated or not current_user.is_admin %}
         <a href="/rent/{{ artwork.id }}">Rent this piece</a>
+        {% endif %}
     {% else %}
         <span class="badge" style="border-color:#A39C8E; color:#A39C8E; background:rgba(163,156,142,0.15);">Not available</span>
     {% endif %}

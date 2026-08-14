@@ -8,13 +8,23 @@
 </head>
 <body>
     <nav>
-        <a href="/">Catalog</a> |
-        {% if current_user.is_authenticated %}
-            <a href="/logout">Logout</a>
-        {% else %}
-            <a href="/login">Login</a> |
-            <a href="/register">Register</a>
-        {% endif %}
+        <div class="nav-brand">
+            <a href="/">Aurora Fine Arts</a>
+        </div>
+        <button class="burger" id="burger-btn" aria-label="Toggle menu">☰</button>
+        <div class="nav-links" id="nav-links">
+            <a href="/">Catalog</a>
+            {% if current_user.is_authenticated %}
+                <a href="/my-rentals">My rentals</a>
+                {% if current_user.is_admin %}
+                    <a href="/admin/rentals">Admin</a>
+                {% endif %}
+                <a href="/logout">Logout</a>
+            {% else %}
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            {% endif %}
+        </div>
     </nav>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -24,7 +34,7 @@
                 {% endfor %}
             </div>
         {% endif %}
-{% endwith %}
+    {% endwith %}
     <hr>
 
     {% block content %}{% endblock %}
