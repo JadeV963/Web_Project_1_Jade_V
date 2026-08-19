@@ -172,3 +172,30 @@ behavior stays predictable
 Add a delete/cancel workflow to complete full CRUD coverage, and change the
 admin approve route from GET to a POST-protected action, before the next
 deliverable.
+
+### Monday, August 17
+
+**Accomplished:**
+Work by reworking the visual design of the site, changed the palette to: charcoal background, quartz pink accents, beige border details. Keep consistent typography system across all pages. Built out the home page hero section with a background image, heading, and an "Enter" button leading to a new virtual gallery page that groups artworks by category ("rooms").
+
+**Challenges faced:**
+Hit a database integrity error when deleting an artwork that still had rental records pointing to it, which required deleting the related rentals first.
+
+**Next step:**
+Continue improving visual consistency across remaining pages, and follow up
+
+### Tuesday, August 18
+
+**Accomplished:**
+Added image upload functionality for artworks using Flask's request.files and secure_filename, so admins can attach real photos when adding new pieces through the form. Added a description field to the Artwork model and displayed it on the artwork detail page alongside the price and two action
+buttons (Rent and View Collection). Added an admin-only DELETE feature for artworks, including cleanup of any related rental records to avoid database integrity errors. Artworks that are rented now appear shaded/grayed out in the catalog instead of disappearing, so users can still see what exists.
+
+**Challenges faced:**
+Ran into repeated issues with the Flask development server not being restarted after code or database changes, leading to confusing errors that looked like bugs but were actually stale server state. 
+
+**Next step:**
+fix the  GET/POST issue on the admin approve route, write a README with project purpose, installation instructions, and environment setup, complete a test checklist covering the
+main workflows, review accessibility (form labels, color contrast), and finish the remaining unstyled pages (login, my-rentals, admin views) to match the design system.
+
+
+
