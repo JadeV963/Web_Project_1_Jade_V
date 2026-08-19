@@ -1,16 +1,34 @@
 {% extends "base.html" %}
 {% block title %}Catalog{% endblock %}
 {% block content %}
+
+    <section class="hero">
+        <div class="hero-overlay">
+            <h1>Step into the virtual Gallery</h1>
+            <p>Explore an immersive virtual gallery where every artwork has its place,
+            , its story, and its collection.
+            </p>
+            <a href="/visit" class="btn-primary">Enter</a>
+        </div>
+    </section>
+
     <h1>Artwork Catalog</h1>
     <div class="catalog-grid">
         {% for art in artworks %}
-            <div class="artwork-card">
+            <div class="artwork-card {% if not art.is_available %}unavailable{% endif %}">
+                <img src="{{ art.image_url }}" alt="{{ art.title }}" class="artwork-img">
                 <a href="/artwork/{{ art.id }}"><strong>{{ art.title }}</strong></a>
                 <p>by {{ art.artist_name }} — ${{ art.price_per_month }}/month</p>
+                <p class="category-tag">{{ art.category }}</p>
                 {% if art.is_available %}
                     <span class="badge">Available</span>
                 {% else %}
                     <span class="badge" style="border-color:#A39C8E; color:#A39C8E; background:rgba(163,156,142,0.15);">Not available</span>
+                {% endif %}
+                {% if current_user.is_authenticated and current_user.is_admin %}
+                    <form method="POST" action="/admin/artworks/{{ art.id }}/delete" style="display:inline;">
+                        <input type="submit" value="Delete">
+                    </form>
                 {% endif %}
             </div>
         {% endfor %}

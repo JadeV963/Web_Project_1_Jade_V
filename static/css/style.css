@@ -10,15 +10,18 @@ body {
     background-color: #1C1B1A;
     color: #F2EDE4;
     line-height: 1.6;
+    border: 3px solid #E8DFD3;
+    min-height: 100vh;
 }
 
 h1, h2 {
     font-family: 'Playfair Display', serif;
+    color: #E3B8C4;
     margin-bottom: 12px;
 }
 
 a {
-    color: #C9899A;
+    color: #E3B8C4;
     text-decoration: none;
 }
 
@@ -52,6 +55,37 @@ nav {
 
 .nav-links a {
     color: #F2EDE4;
+}
+
+.hero {
+    background-image: linear-gradient(rgba(232,223,211,0.35), rgba(232,223,211,0.35)), url("/static/images/hero.png");
+    background-size: cover;
+    background-position: center;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: .7px;
+    padding: 40px 20px;
+    border: 4px solid #E8DFD3;
+    border-radius: 1px;
+}
+
+.hero-overlay {
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    color: #F2EDE4;
+}
+
+.hero p {
+    font-size: 16px;
+    color: #F2EDE4;
+    margin-bottom: 24px;
+    line-height: 1.6;
 }
 
 /* Contenu principal */
@@ -95,12 +129,22 @@ form input {
 }
 
 form input[type="submit"] {
-    background: #C9899A;
-    color: #2B1219;
+    background: #2C2A28;
+    color: #F2EDE4;
     font-weight: 600;
     cursor: pointer;
     max-width: fit-content;
     border: none;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: #2C2A28;
+    color: #F2EDE4;
+    font-weight: 600;
+    padding: 12px 32px;
+    border-radius: 6px;
+    text-decoration: none;
 }
 
 /* Validation en direct (register) */
@@ -116,7 +160,7 @@ form input[type="submit"] {
     color: #8A9B8E;
 }
 .field-feedback.invalid {
-    color: #C9899A;
+    color: #E3B8C4;
 }
 .icon {
     font-weight: bold;
@@ -128,7 +172,7 @@ form input[type="submit"] {
 }
 .icon.invalid::before {
     content: "✗";
-    color: #C9899A;
+    color: #E3B8C4;
 }
 input:disabled[type="submit"] {
     opacity: 0.5;
@@ -146,8 +190,127 @@ input:disabled[type="submit"] {
     margin-bottom: 0;
 }
 
+.welcome-msg {
+    color: #A39C8E;
+    font-size: 14px;
+}
+
+.category-tag {
+    font-size: 12px;
+    color: #E3B8C4;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.artwork-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.artwork-card.unavailable {
+    opacity: 0.5;
+}
+
+.artwork-card.unavailable .artwork-img {
+    filter: grayscale(60%);
+}
+/* Page détail d'une œuvre */
+.detail-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+.detail-img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.detail-info h1 {
+    margin-bottom: 4px;
+}
+
+.detail-artist {
+    color: #A39C8E;
+    margin-bottom: 8px;
+}
+
+.detail-price {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 12px 0;
+}
+
+.detail-actions {
+    margin-top: 20px;
+}
+
+.detail-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+.detail-img {
+    width: 100%;
+    min-height: 300px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #262523;
+}
+
+.detail-info h1 {
+    margin-bottom: 4px;
+}
+
+.detail-artist {
+    color: #A39C8E;
+    margin-bottom: 8px;
+}
+
+.detail-description {
+    color: #A39C8E;
+    margin: 12px 0;
+    line-height: 1.6;
+}
+
+.detail-price {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 12px 0;
+}
+
+.detail-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid #E8DFD3;
+    color: #F2EDE4;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+
 /* Responsive : mobile */
 @media (max-width: 600px) {
+    .detail-layout {
+        grid-template-columns: 1fr;
+    }
+   
     main {
         padding: 20px 16px;
     }

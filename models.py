@@ -25,6 +25,8 @@ class Artwork(db.Model):
     category = db.Column(db.String(80))
     price_per_month = db.Column(db.Float, nullable=False)
     is_available = db.Column(db.Boolean, default=True)
+    image_url = db.Column(db.String(300))
+    description = db.Column(db.Text)
 
     def __repr__(self):
         return f"<Artwork {self.title}>"

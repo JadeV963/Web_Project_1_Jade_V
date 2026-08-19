@@ -15,9 +15,15 @@
         <div class="nav-links" id="nav-links">
             <a href="/">Catalog</a>
             {% if current_user.is_authenticated %}
+                {% if current_user.is_admin %}
+                    <span class="welcome-msg">Welcome, {{ current_user.name }} (Admin)</span>
+                {% else %}
+                    <span class="welcome-msg">Welcome, {{ current_user.name }}</span>
+                {% endif %}
                 <a href="/my-rentals">My rentals</a>
                 {% if current_user.is_admin %}
                     <a href="/admin/rentals">Admin</a>
+                    <a href="/admin/artworks/add">Add Artwork</a>
                 {% endif %}
                 <a href="/logout">Logout</a>
             {% else %}

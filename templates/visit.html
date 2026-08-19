@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Virtual Gallery{% endblock %}
+{% block content %}
+    <h1>Virtual Gallery</h1>
+    <p>Dive into the virtual collection, room by room.</p>
+
+    {% for category, artworks_in_room in rooms.items() %}
+        <h2 class="room-title">{{ category }}</h2>
+        <div class="catalog-grid">
+            {% for art in artworks_in_room %}
+                <div class="artwork-card">
+                    <a href="/artwork/{{ art.id }}"><strong>{{ art.title }}</strong></a>
+                    <p>by {{ art.artist_name }} — ${{ art.price_per_month }}/month</p>
+                    {% if art.is_available %}
+                        <span class="badge">Available</span>
+                    {% else %}
+                        <span class="badge" style="border-color:#A39C8E; color:#A39C8E; background:rgba(163,156,142,0.15);">Not available</span>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -10,6 +10,9 @@
                 <span class="badge">Confirmed</span>
             {% else %}
                 <span class="badge" style="border-color:#C9899A; color:#C9899A; background:rgba(201,137,154,0.15);">Pending</span>
+                <form method="POST" action="/rent/{{ rental.id }}/cancel" style="display:inline;">
+                    <input type="submit" value="Cancel">
+                </form>
             {% endif %}
         </div>
     {% endfor %}

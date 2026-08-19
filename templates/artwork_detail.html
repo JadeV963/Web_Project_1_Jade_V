@@ -1,17 +1,31 @@
 {% extends "base.html" %}
 {% block title %}{{ artwork.title }}{% endblock %}
 {% block content %}
-    <h1>{{ artwork.title }}</h1>
-    <p>by {{ artwork.artist_name }}</p>
-    <p>{{ artwork.category }}</p>
-    <p>${{ artwork.price_per_month }}/month</p>
+    <div class="detail-layout">
+        <img src="{{ artwork.image_url }}" alt="{{ artwork.title }}" class="detail-img">
+        <div class="detail-info">
+            <h1>{{ artwork.title }}</h1>
+            <p class="detail-artist">by {{ artwork.artist_name }}</p>
+            <p class="category-tag">{{ artwork.category }}</p>
 
-    {% if artwork.is_available %}
-        <span class="badge">Available</span><br><br>
-        {% if not current_user.is_authenticated or not current_user.is_admin %}
-        <a href="/rent/{{ artwork.id }}">Rent this piece</a>
-        {% endif %}
-    {% else %}
-        <span class="badge" style="border-color:#A39C8E; color:#A39C8E; background:rgba(163,156,142,0.15);">Not available</span>
-    {% endif %}
+            {% if artwork.description %}
+                <p class="detail-description">{{ artwork.description }}</p>
+            {% endif %}
+
+            <p class="detail-price">${{ artwork.price_per_month }}/month</p>
+
+            {% if artwork.is_available %}
+                <span class="badge">Available</span>
+            {% else %}
+                <span class="badge" style="border-color:#A39C8E; color:#A39C8E; background:rgba(163,156,142,0.15);">Not available</span>
+            {% endif %}
+
+            <div class="detail-actions">
+                {% if artwork.is_available and (not current_user.is_authenticated or not current_user.is_admin) %}
+                    <a href="/rent/{{ artwork.id }}" class="btn-primary">Rent</a>
+                {% endif %}
+                <a href="/visit" class="btn-secondary">View Collection</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

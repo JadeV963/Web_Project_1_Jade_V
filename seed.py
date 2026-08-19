@@ -10,24 +10,33 @@ with app.app_context():
         artist_name = "Marcus Reyes",
         category="Mixed media",
         price_per_month=60.00,
-        is_available=True
+        is_available=True,
+        image_url = "/static/images/image3.jpeg",
+        description="A study in layered color and texture, exploring how natural light fractures across urban surfaces at dusk."
+
     )
 
     artwork2 = Artwork(
-            title="Terra Rossa",
-            artist_name = "Elena Cho",
-            category="Painting",
-            price_per_month=45.00,
-            is_available=True
-        )
+        title="Terra Rossa",
+        artist_name = "Elena Cho",
+        category="Painting",
+        price_per_month=45.00,
+        is_available=True,
+        image_url = "/static/images/s-l1200.jpg",
+        description="Warm earthen tones inspired by Mediterranean landscapes and sun-baked clay."
+
+    )
 
     artwork3 = Artwork(
-                title="Pi",
-                artist_name = "Sharuk",
-                category="Painting",
-                price_per_month=70.00,
-                is_available=True
-            )
+        title="Pi",
+        artist_name = "Sharuk",
+        category="Painting",
+        price_per_month=70.00,
+        is_available=True,
+        image_url = "/static/images/image5.jpeg",
+        description="An abstract exploration of infinite patterns and mathematical harmony."
+
+    )
     
 
     db.session.add(artwork1)

@@ -187,11 +187,109 @@ def rent(artwork_id):
         return f"Rental request submitted for {artwork.title}!"
 
     return render_template("rent.html", artwork=artwork)
+
 @app.route("/my-rentals")
 @login_required
 def my_rentals():
     rentals = Rental.query.filter_by(user_id=current_user.id).all()
     return render_template("my_rentals.html", rentals=rentals)
+
+
+import os
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = os.path.join("static", "images", "uploads")
+@app.route("/admin/artworks/add", methods=["GET", "POST"])
+@login_required
+def add_artwork():
+    if not current_user.is_admin:
+        flash("Access denied - admins only.", "error")
+        return redirect(url_for("home"))
+
+    if request.method == "POST":
+        title = request.form.get("title")
+        artist_name = request.form.get("artist_name")
+        category = request.form.get("category")
+        price_per_month = request.form.get("price_per_month")
+        description = request.form.get("description")
+        image_file = request.files.get("image")
+
+        if not title or not artist_name or not price_per_month:
+            flash ("Title, artist name, and price are required.", "error")
+            return redirect(url_for("add_artwork"))
+
+        image_url = None
+        if image_file and image_file.filename != "":
+            filename = secure_filename(image_file.filename)
+            image_file.save(os.path.join(UPLOAD_FOLDER, filename))
+            image_url = f"/static/images/uploads/{filename}"
+
+        new_artwork = Artwork(
+            title= title,
+            artist_name = artist_name,
+            category= category,
+            price_per_month =float(price_per_month),
+            is_available=True,
+            image_url=image_url,
+            description=description
+        )    
+
+        db.session.add(new_artwork)
+        db.session.commit()
+
+        flash(f"{title} added to the catalog!", "success")
+        return redirect(url_for("home"))
+
+    return render_template("add_artwork.html")
+
+@app.route("/admin/artworks/<int:artwork_id>/delete", methods=["POST"])
+@login_required
+def delete_artwork(artwork_id):
+    if not current_user.is_admin:
+        flash("Access denied — admins only.", "error")
+        return redirect(url_for("home"))
+
+    artwork = Artwork.query.get_or_404(artwork_id)
+
+    for rental in artwork.rentals:
+        db.session.delete(rental)
+
+    db.session.delete(artwork)
+    db.session.commit()
+
+    flash(f"{artwork.title} removed from the catalog.", "success")
+    return redirect(url_for("home"))
+
+@app.route("/rent/<int:rental_id>/cancel", methods=["POST"])
+@login_required
+def cancel_rental(rental_id):
+    rental = Rental.query.get_or_404(rental_id)
+
+    if rental.user_id != current_user.id:
+        flash("You can only cancel your own rental requests.", "error")
+        return redirect(url_for("my_rentals"))
+
+    if rental.status != "pending":
+        flash("Only pending requests can be cancelled.", "error")
+        return redirect(url_for("my_rentals"))
+
+    artwork = rental.artwork
+    artwork.is_available = True
+
+    db.session.delete(rental)
+    db.session.commit()
+
+    flash("Rental request cancelled.", "success")
+    return redirect(url_for("my_rentals"))
+
+@app.route("/visit")
+def visit():
+    artworks = Artwork.query.all()
+
+    rooms = {}
+    for art in artworks:
+        rooms.setdefault(art.category, []).append(art)
+    return render_template("visit.html", rooms=rooms)
 
 if __name__ == "__main__":
     with app.app_context():
