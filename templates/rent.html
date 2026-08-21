@@ -6,8 +6,10 @@
         <h1>Rent "{{ artwork.title }}"</h1>
         <p>by {{ artwork.artist_name}} - ${{ artwork.price_per_month }}/month</p>
         <form method="POST">
-            Start date: <input type="date" name="start_date"><br>
-            End date: <input type="date" name="end_date"><br>
+            <label for="start_date">Start date:</label>
+            <input type="date" name="start_date" min="{{today}}"><br>
+            <label for="end_date">
+            <input type="date" name="end_date" min="{{today}}"><br>
             <input type="submit" value="Submit request">
         </form>
     </div>

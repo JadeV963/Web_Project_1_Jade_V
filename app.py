@@ -9,7 +9,7 @@ from flask import Flask, request, render_template, redirect, url_for
 
 from flask import Flask, request, render_template, redirect, url_for, flash
 
-from datetime import datetime
+from datetime import datetime, date
 #---------------------------------------------------
 # Creation de l'application
 app = Flask(__name__)
@@ -202,6 +202,10 @@ def rent(artwork_id):
         start = datetime.strptime(request.form.get("start_date"), "%Y-%m-%d").date()
         end = datetime.strptime(request.form.get("end_date"), "%Y-%m-%d").date()
 
+        if start < date.today():
+            flash("Start date cannot be in the past.", "error")
+            return redirect(url_for("rent", artwork_id=artwork_id))
+        
         if end <= start:
             return "End date must be after start date."
 
@@ -220,8 +224,11 @@ def rent(artwork_id):
 
         flash(f"Rental request submitted for {artwork.title}!")
         return redirect(url_for("my_rentals"))
+    
+    today = date.today().isoformat()
+    return render_template("rent.html", artwork=artwork, today=today)
 
-    return render_template("rent.html", artwork=artwork)
+
 
 @app.route("/my-rentals")
 @login_required
