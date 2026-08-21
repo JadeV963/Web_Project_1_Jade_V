@@ -111,13 +111,30 @@ def login():
         user = User.query.filter_by(email=email).first()
 
         if user is None or not user.check_password(password):
-           return "Invalid email or password."
+            flash("Invalid email or password.", "error")
+            return redirect(url_for("login"))
 
         login_user(user)
-        flash(f"Logged in as {user.name}!")
+        flash(f"Logged in as {user.name}!", "success")
+
+        if user.is_admin:
+            return redirect(url_for("admin_dashboard"))
+
         return redirect(url_for("home"))
 
     return render_template("login.html")
+
+@app.route("/admin/dashboard")
+@login_required
+def admin_dashboard():
+    if not current_user.is_admin:
+        flash("Access denied — admins only.", "error")
+        return redirect(url_for("home"))
+
+    pending = Rental.query.filter_by(status="pending").all()
+    artworks = Artwork.query.all()
+
+    return render_template("admin_dashboard.html", rentals=pending, artworks=artworks)
 
 @app.route("/admin/rentals")
 @login_required
@@ -128,7 +145,7 @@ def admin_rentals():
     pending = Rental.query.filter_by(status="pending").all()
     return render_template("admin_rentals.html", rentals=pending)
 
-@app.route("/admin/rentals/<int:rental_id>/approve")
+@app.route("/admin/rentals/<int:rental_id>/approve", methods=["POST"])
 @login_required
 def approve_rental(rental_id):
     if not current_user.is_admin:
@@ -138,7 +155,24 @@ def approve_rental(rental_id):
     rental.status = "confirmed"
     db.session.commit()
 
-    return f"Rental #{rental.id} confirmed."
+    return redirect(url_for("admin_dashboard"))
+
+@app.route("/admin/rentals/<int:rental_id>/reject", methods=["POST"])
+@login_required
+def reject_rental(rental_id):
+    if not current_user.is_admin:
+        return "Access denied — admins only.", 403
+
+    rental = Rental.query.get_or_404(rental_id)
+
+    artwork = rental.artwork
+    artwork.is_available = True
+
+    db.session.delete(rental)
+    db.session.commit()
+
+    flash("Rental request rejected.", "success")
+    return redirect(url_for("admin_dashboard"))
 
 @app.route("/logout")
 @login_required
@@ -184,7 +218,8 @@ def rent(artwork_id):
         db.session.add(new_rental)
         db.session.commit()
 
-        return f"Rental request submitted for {artwork.title}!"
+        flash(f"Rental request submitted for {artwork.title}!")
+        return redirect(url_for("my_rentals"))
 
     return render_template("rent.html", artwork=artwork)
 
@@ -212,6 +247,7 @@ def add_artwork():
         category = request.form.get("category")
         price_per_month = request.form.get("price_per_month")
         description = request.form.get("description")
+        dimensions = request.form.get("dimensions")
         image_file = request.files.get("image")
 
         if not title or not artist_name or not price_per_month:
@@ -230,15 +266,15 @@ def add_artwork():
             category= category,
             price_per_month =float(price_per_month),
             is_available=True,
+            description=description,
             image_url=image_url,
-            description=description
         )    
 
         db.session.add(new_artwork)
         db.session.commit()
 
         flash(f"{title} added to the catalog!", "success")
-        return redirect(url_for("home"))
+        return redirect(url_for("admin_dashboard"))
 
     return render_template("add_artwork.html")
 
@@ -258,7 +294,7 @@ def delete_artwork(artwork_id):
     db.session.commit()
 
     flash(f"{artwork.title} removed from the catalog.", "success")
-    return redirect(url_for("home"))
+    return redirect(url_for("admin_dashboard"))
 
 @app.route("/rent/<int:rental_id>/cancel", methods=["POST"])
 @login_required
@@ -290,6 +326,10 @@ def visit():
     for art in artworks:
         rooms.setdefault(art.category, []).append(art)
     return render_template("visit.html", rooms=rooms)
+
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
 
 if __name__ == "__main__":
     with app.app_context():

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<div class="admin-dashboard">
+    <h1>Admin Dashboard</h1>
+
+    <div class="admin-columns">
+        <section class="admin-section admin-col-left">
+            <h2>Manage Artworks</h2>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Artist</th>
+                        <th>Category</th>
+                        <th>Dimensions</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for art in artworks %}
+                        <tr>
+                            <td>{{ art.title }}</td>
+                            <td>{{ art.artist_name }}</td>
+                            <td>{{ art.category }}</td>
+                            <td>{{ art.dimensions or "-"}}</td>
+                            <td>${{ art.price_per_month }}/mo</td>
+                            <td>
+                                {% if art.is_available %}
+                                    <span class="badge">Available</span>
+                                {% else %}
+                                    <span class="badge" style="border-color:#A39C8E; color:#A39C8E; background:rgba(163,156,142,0.15);">Rented</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <form method="POST" action="/admin/artworks/{{ art.id }}/delete">
+                                    <input type="submit" value="Delete" class="btn-small btn-reject">
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <div class="admin-col-right">
+            <section class="admin-section">
+                <h2>Pending Rental Requests</h2>
+                {% if rentals %}
+                    <div class="admin-list">
+                        {% for rental in rentals %}
+                            <div class="admin-row">
+                                <div>
+                                    <strong>{{ rental.artwork.title }}</strong> for {{ rental.user.name }}
+                                    <p class="admin-row-meta">{{ rental.start_date }} to {{ rental.end_date }}</p>
+                                </div>
+                                <div class="admin-row-actions">
+                                    <form method="POST" action="/admin/rentals/{{ rental.id }}/approve" style="display:inline;">
+                                        <input type="submit" value="Approve" class="btn-small btn-approve">
+                                    </form>
+                                    <form method="POST" action="/admin/rentals/{{ rental.id }}/reject" style="display:inline;">
+                                        <input type="submit" value="Reject" class="btn-small btn-reject">
+                                    </form>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="admin-empty">No pending requests.</p>
+                {% endif %}
+            </section>
+
+            <section class="admin-section">
+                <h2>Add New Artwork</h2>
+                <form method="POST" action="/admin/artworks/add" enctype="multipart/form-data" class="admin-add-form">
+                    <input type="text" name="title" placeholder="Title" required>
+                    <input type="text" name="artist_name" placeholder="Artist name" required>
+                    <select name="category">
+                        <option value="Painting">Painting</option>
+                        <option value="Photography">Photography</option>
+                        <option value="Sculpture">Sculpture</option>
+                        <option value="Mixed media">Mixed media</option>
+                        <option value="Drawing">Drawing</option>
+                        <option value="Printmaking">Printmaking</option>
+                    </select>
+                    <textarea name="description" placeholder="Description" rows="3"></textarea>
+                    <input type="number" step="0.01" name="price_per_month" placeholder="Price per month ($)" required>
+                    <input type="text" name="dimensions" placeholder="Dimensions (e.g. 24x36 in)">
+                    <input type="file" name="image" accept="image/*">
+                    <input type="submit" value="Add Artwork" class="btn-small btn-approve">
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}

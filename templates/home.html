@@ -12,25 +12,34 @@
         </div>
     </section>
 
-    <h1>Artwork Catalog</h1>
-    <div class="catalog-grid">
-        {% for art in artworks %}
-            <div class="artwork-card {% if not art.is_available %}unavailable{% endif %}">
-                <img src="{{ art.image_url }}" alt="{{ art.title }}" class="artwork-img">
-                <a href="/artwork/{{ art.id }}"><strong>{{ art.title }}</strong></a>
-                <p>by {{ art.artist_name }} — ${{ art.price_per_month }}/month</p>
-                <p class="category-tag">{{ art.category }}</p>
-                {% if art.is_available %}
-                    <span class="badge">Available</span>
-                {% else %}
-                    <span class="badge" style="border-color:#A39C8E; color:#A39C8E; background:rgba(163,156,142,0.15);">Not available</span>
-                {% endif %}
-                {% if current_user.is_authenticated and current_user.is_admin %}
-                    <form method="POST" action="/admin/artworks/{{ art.id }}/delete" style="display:inline;">
-                        <input type="submit" value="Delete">
-                    </form>
-                {% endif %}
-            </div>
-        {% endfor %}
+    <div class="catalog-section">
+        <h2>Artwork Catalog</h2>
+        <p class="catalog-description">
+            Every piece in our collection is available for monthly rental, giving
+            you the freedom to refresh your space without a permanent commitment.
+            From bold abstract works to quiet, contemplative pieces, Aurora Fine
+            Arts partners with local and emerging artists to bring original art
+            into homes and offices across the city.
+        </p>
+        <div class="catalog-grid">
+            {% for art in artworks %}
+                <div class="artwork-card {% if not art.is_available %}unavailable{% endif %}">
+                    <img src="{{ art.image_url }}" alt="{{ art.title }}" class="artwork-img">
+                    <a href="/artwork/{{ art.id }}"><strong>{{ art.title }}</strong></a>
+                    <p>by {{ art.artist_name }} — ${{ art.price_per_month }}/month</p>
+                    <p class="category-tag">{{ art.category }}</p>
+                    {% if art.is_available %}
+                        <span class="badge">Available</span>
+                    {% else %}
+                        <span class="badge" style="border-color:#A39C8E; color:#A39C8E; background:rgba(163,156,142,0.15);">Not available</span>
+                    {% endif %}
+                    {% if current_user.is_authenticated and current_user.is_admin %}
+                        <form method="POST" action="/admin/artworks/{{ art.id }}/delete" style="display:inline;">
+                            <input type="submit" value="Delete">
+                        </form>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

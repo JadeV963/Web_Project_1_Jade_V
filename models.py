@@ -27,7 +27,8 @@ class Artwork(db.Model):
     is_available = db.Column(db.Boolean, default=True)
     image_url = db.Column(db.String(300))
     description = db.Column(db.Text)
-
+    dimensions = db.Column(db.String(50))
+    
     def __repr__(self):
         return f"<Artwork {self.title}>"
 

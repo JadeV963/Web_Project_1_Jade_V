@@ -14,10 +14,20 @@ body {
     min-height: 100vh;
 }
 
-h1, h2 {
+h1 {
     font-family: 'Playfair Display', serif;
     color: #E3B8C4;
     margin-bottom: 12px;
+}
+
+h2 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 50px;
+    font-weight: 700;
+    color: #E3B8C4;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 30px;
 }
 
 a {
@@ -27,6 +37,14 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.catalog-description {
+    max-width: 600px;
+    margin: 12px auto 90px;
+    text-align: center;
+    color: #A39C8E;
+    line-height: 1.7;
 }
 
 /* Navigation */
@@ -57,8 +75,28 @@ nav {
     color: #F2EDE4;
 }
 
+.welcome-msg {
+    color: #A39C8E;
+    font-size: 14px;
+}
+
+.nav-brand a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #F2EDE4;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+}
+
+/* Hero (page d'accueil) */
 .hero {
-    background-image: linear-gradient(rgba(232,223,211,0.35), rgba(232,223,211,0.35)), url("/static/images/hero.png");
+    background-image: linear-gradient(rgba(28,27,26,0.55), rgba(28,27,26,0.65)), url("/static/images/hero.png");
     background-size: cover;
     background-position: center;
     min-height: 600px;
@@ -66,10 +104,9 @@ nav {
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-top: .7px;
+    margin-top: 0px;
     padding: 40px 20px;
-    border: 4px solid #E8DFD3;
-    border-radius: 1px;
+    border-radius: 2px;
 }
 
 .hero-overlay {
@@ -77,12 +114,12 @@ nav {
 }
 
 .hero h1 {
-    font-size: 42px;
+    font-size: 70px;
     color: #F2EDE4;
 }
 
 .hero p {
-    font-size: 16px;
+    font-size: 20px;
     color: #F2EDE4;
     margin-bottom: 24px;
     line-height: 1.6;
@@ -104,79 +141,28 @@ main {
     margin-bottom: 16px;
 }
 
-/* Badges de statut (available / rented / pending) */
-.badge {
-    display: inline-block;
-    font-size: 12px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    border: 1px solid #8A9B8E;
-    color: #8A9B8E;
-    background: rgba(138, 155, 142, 0.15);
-}
-
-/* Formulaires */
-form input {
-    display: block;
-    width: 100%;
-    max-width: 320px;
-    padding: 10px;
-    margin: 8px 0 16px;
-    background: #262523;
-    border: 1px solid #3A3835;
-    border-radius: 6px;
-    color: #F2EDE4;
-}
-
-form input[type="submit"] {
-    background: #2C2A28;
-    color: #F2EDE4;
-    font-weight: 600;
-    cursor: pointer;
-    max-width: fit-content;
-    border: none;
-}
-
-.btn-primary {
-    display: inline-block;
-    background: #2C2A28;
-    color: #F2EDE4;
-    font-weight: 600;
-    padding: 12px 32px;
-    border-radius: 6px;
-    text-decoration: none;
-}
-
-/* Validation en direct (register) */
-.field-feedback {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: #A39C8E;
-    margin: 4px 0 16px;
-}
-.field-feedback.valid {
-    color: #8A9B8E;
-}
-.field-feedback.invalid {
-    color: #E3B8C4;
-}
-.icon {
-    font-weight: bold;
-    width: 14px;
-}
-.icon.valid::before {
-    content: "✓";
-    color: #8A9B8E;
-}
-.icon.invalid::before {
-    content: "✗";
-    color: #E3B8C4;
-}
-input:disabled[type="submit"] {
+.artwork-card.unavailable {
     opacity: 0.5;
-    cursor: not-allowed;
+}
+
+.artwork-card.unavailable .artwork-img {
+    filter: grayscale(60%);
+}
+
+.artwork-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.category-tag {
+    font-size: 12px;
+    color: #E3B8C4;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
 }
 
 /* Grille du catalogue */
@@ -190,67 +176,18 @@ input:disabled[type="submit"] {
     margin-bottom: 0;
 }
 
-.welcome-msg {
-    color: #A39C8E;
-    font-size: 14px;
-}
-
-.category-tag {
+/* Badges de statut (available / rented / pending) */
+.badge {
+    display: inline-block;
     font-size: 12px;
-    color: #E3B8C4;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid #8A9B8E;
+    color: #8A9B8E;
+    background: rgba(138, 155, 142, 0.15);
 }
 
-.artwork-img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 6px;
-    margin-bottom: 12px;
-}
-
-.artwork-card.unavailable {
-    opacity: 0.5;
-}
-
-.artwork-card.unavailable .artwork-img {
-    filter: grayscale(60%);
-}
 /* Page détail d'une œuvre */
-.detail-layout {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 32px;
-    align-items: start;
-}
-
-.detail-img {
-    width: 100%;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-.detail-info h1 {
-    margin-bottom: 4px;
-}
-
-.detail-artist {
-    color: #A39C8E;
-    margin-bottom: 8px;
-}
-
-.detail-price {
-    font-size: 20px;
-    font-weight: 600;
-    margin: 12px 0;
-}
-
-.detail-actions {
-    margin-top: 20px;
-}
-
 .detail-layout {
     display: grid;
     grid-template-columns: 1.1fr 1fr;
@@ -293,6 +230,20 @@ input:disabled[type="submit"] {
     margin-top: 20px;
 }
 
+/* Boutons */
+.btn-primary,
+form input[type="submit"] {
+    display: inline-block;
+    background: #E3B8C4;
+    color: #2B1219;
+    font-weight: 600;
+    padding: 12px 32px;
+    border-radius: 6px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .btn-secondary {
     display: inline-block;
     background: transparent;
@@ -304,19 +255,233 @@ input:disabled[type="submit"] {
     text-decoration: none;
 }
 
+/* Formulaires */
+form input {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    height: 50px;
+    padding: 10px;
+    margin: 8px 0 16px;
+    background: #262523;
+    border: 1px solid #3A3835;
+    border-radius: 25px;
+    color: #F2EDE4;
+}
+
+input:disabled[type="submit"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Pages avec formulaire (register, login, rent, add_artwork) */
+.form-page {
+    background-image: url("/static/images/pattern.png");
+    background-repeat: repeat;
+    background-size: 220px;
+    border-radius: 8px;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.form-card {
+    background: rgba(28, 27, 26, 0.88);
+    border: 1px solid #3A3835;
+    border-radius: 8px;
+    padding: 32px;
+    max-width: 420px;
+    width: 100%;
+}
+
+.form-card h1 {
+    margin-bottom: 20px;
+}
+
+.form-card p {
+    margin-top: 16px;
+}
+
+/* Validation en direct (register) */
+.field-feedback {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #A39C8E;
+    margin: 4px 0 16px;
+}
+.field-feedback.valid {
+    color: #8A9B8E;
+}
+.field-feedback.invalid {
+    color: #E3B8C4;
+}
+.icon {
+    font-weight: bold;
+    width: 14px;
+}
+.icon.valid::before {
+    content: "✓";
+    color: #8A9B8E;
+}
+.icon.invalid::before {
+    content: "✗";
+    color: #E3B8C4;
+}
+
+/* Dashboard admin */
+.admin-dashboard {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 0;
+}
+
+.admin-columns {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.admin-section {
+    background: #FAF8F4;
+    border: 1px solid #E8E3D9;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    color: #2C2A28;
+}
+
+.admin-section h2 {
+    text-align: left;
+    margin: 0 0 16px;
+    color: #2C2A28;
+}
+
+.admin-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.admin-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border: 1px solid #E8E3D9;
+    border-radius: 6px;
+    padding: 12px 16px;
+    gap: 12px;
+    color: #2C2A28;
+}
+
+.admin-row-meta {
+    color: #6B665D;
+    font-size: 13px;
+    margin: 4px 0;
+}
+
+.admin-row-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.admin-empty {
+    color: #6B665D;
+}
+
+.admin-add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.admin-add-form input,
+.admin-add-form select,
+.admin-add-form textarea {
+    background: #FFFFFF;
+    border: 1px solid #D8CFC0;
+    border-radius: 6px;
+    padding: 10px;
+    color: #2C2A28;
+    width: 100%;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.admin-table th,
+.admin-table td {
+    text-align: left;
+    padding: 1px 10px;
+    border-bottom: 1px solid #E8E3D9;
+    color: #2C2A28;
+    white-space: nowrap;
+}
+
+.admin-table th {
+    color: #6B665D;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-small {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-approve {
+    background: #8A9B8E;
+    color: #17251C;
+}
+
+.btn-reject {
+    background: #E3B8C4;
+    color: #2B1219;
+}
 
 /* Responsive : mobile */
 @media (max-width: 600px) {
-    .detail-layout {
-        grid-template-columns: 1fr;
+    h2 {
+        font-size: 22px;
+        margin: 24px 0;
     }
-   
+
+    .logo {
+        height: 24px;
+    }
+
+    .nav-brand a {
+        font-size: 15px;
+        gap: 6px;
+    }
+
     main {
         padding: 20px 16px;
     }
 
     .catalog-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .detail-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-columns {
+        grid-template-columns: 1fr;
     }
 
     .burger {

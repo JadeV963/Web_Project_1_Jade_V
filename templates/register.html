@@ -1,23 +1,27 @@
 {% extends "base.html" %}
 {% block title %}Register{% endblock %}
 {% block content %}
-    <h1>Create an account</h1>
-    <form method="POST" id="register-form">
-        Name: <input type="text" name="name"><br><br>
+<div class="form-page">
+    <div class="form-card">
+        <h1>Create an account</h1>
+        <form method="POST" id="register-form">
+            Name: <input type="text" name="name"><br>
 
-        Email: <input type="email" name="email" id="email"><br>
-        <p class="field-feedback" id="email-feedback">
-            <span class="icon" id="email-icon"></span>
-            <span id="email-hint">Format: name@example.com</span>
-        </p>
+            Email: <input type="email" name="email" id="email">
+            <p class="field-feedback" id="email-feedback">
+                <span class="icon" id="email-icon"></span>
+                <span id="email-hint">Format: name@example.com</span>
+            </p><br>
 
-        Password: <input type="password" name="password" id="password"><br>
-        <p class="field-feedback" id="password-feedback">
-            <span class="icon" id="password-icon"></span>
-            <span id="password-hint">At least 8 characters, one uppercase letter, one number</span>
-        </p>
+            Password: <input type="password" name="password" id="password">
+            <p class="field-feedback" id="password-feedback">
+                <span class="icon" id="password-icon"></span>
+                <span id="password-hint">At least 8 characters, one uppercase letter, one number</span>
+            </p>
 
-        <input type="submit" value="Register" id="submit-btn" disabled>
-    </form>
-    <p>Already have an account? <a href="/login">Log in here</a></p>
+            <input type="submit" value="Register" id="submit-btn" disabled>
+        </form>
+        <p>Already have an account? <a href="/login">Log in here</a></p>
+    </div>
+</div>
 {% endblock %}

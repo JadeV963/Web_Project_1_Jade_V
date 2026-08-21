@@ -1,28 +1,31 @@
 {% extends "base.html" %}
 {% block title %}Add Artwork{% endblock %}
 {% block content %}
-    <h1>Add new Artwork</h1>
-    <form method="POST" enctype="multipart/form-data">
-        Title: <input type="text" name="title"><br>
-        Artist name: <input type="text" name="artist_name"><br>
-        
-        Category:
-        <select name="category">
-            <option value="Painting">Painting</option>
-            <option value="Photography">Photography</option>
-            <option value="Sculpture">Sculpture</option>
-            <option value="Mixed media">Mixed media</option>
-            <option value="Drawing">Drawing</option>
-            <option value="Printmaking">Printmaking</option>
-        </select><br>
+<div class="form-page">
+    <div class="form-card">
+        <h1>Add new Artwork</h1>
+        <form method="POST" enctype="multipart/form-data">
+            Title: <input type="text" name="title"><br>
+            Artist name: <input type="text" name="artist_name"><br>
+            
+            Category:
+            <select name="category">
+                <option value="Painting">Painting</option>
+                <option value="Photography">Photography</option>
+                <option value="Sculpture">Sculpture</option>
+                <option value="Mixed media">Mixed media</option>
+                <option value="Drawing">Drawing</option>
+                <option value="Printmaking">Printmaking</option>
+            </select><br>
 
-        Description: <textarea name="description" rows="4" cols="40"></textarea><br>
-        
-        Price per Month ($): <input type="number" step="0.01" name="price_per_month"><br>
-        
-        Image: <input type="file" name="image" accept="image/*"><br>
+            Description: <textarea name="description" rows="4" cols="40"></textarea><br>
+            
+            Price per Month ($): <input type="number" step="0.01" name="price_per_month"><br>
+            
+            Image: <input type="file" name="image" accept="image/*"><br>
 
-        <input type="submit" name="Add Artwork">
-    </form>
-
+            <input type="submit" name="Add Artwork">
+        </form>
+    </div>
+</div>
 {% endblock %}
