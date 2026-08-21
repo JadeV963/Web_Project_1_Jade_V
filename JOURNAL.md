@@ -197,5 +197,33 @@ Ran into repeated issues with the Flask development server not being restarted a
 fix the  GET/POST issue on the admin approve route, write a README with project purpose, installation instructions, and environment setup, complete a test checklist covering the
 main workflows, review accessibility (form labels, color contrast), and finish the remaining unstyled pages (login, my-rentals, admin views) to match the design system.
 
+### Wednesday, August 19
+
+**Accomplished:**
+Added a full delete workflow for artworks (admin-only), including cleanup
+of related rental records before deletion to avoid a database integrity
+error.
+Redesigned the CSS color palette with quartz pink accents and a warmer charcoal background.
+Built a unified admin dashboard combining pending rental approvals, an
+add-artwork form with image upload, and a table to manage/delete existing
+artworks. Fixed the admin approve route to use POST instead of GET.
+Styled all remaining form pages to match the site's design system. Added
+a dimensions field to artworks. Wrote the project README, generated
+requirements.txt, and created a testing checklist.
+
+**Challenges faced:**
+Ran into a database integrity error when deleting an artwork still linked
+to rental records — had to delete the rentals first. Also had a table
+where the header and data rows didn't match in column count.
+
+**Next step:**
+Improve the rental flow based on professor feedback: the user should be
+notified immediately whether their chosen date range is available before
+the request goes to the admin for approval, rather than finding out only
+after submitting. Also prevent users from selecting a past date when
+requesting a rental. verify color contrast, improve the overall visual design
+to feel more like an art gallery, and do a final review before submitting
+the Feature-Complete Beta.
+
 
 
